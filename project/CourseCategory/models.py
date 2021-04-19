@@ -21,7 +21,7 @@ class CourseDetail(models.Model):
     detail = models.CharField(max_length=200, blank=True, null=True)    
     pdf  = models.FileField(upload_to='course-files', blank=True, null=True)
     image = models.ImageField(upload_to="course-images", blank=True, null=True)
-    video = models.URLField(max_length=200, blank=True, null=True) 
+    video = models.CharField(max_length=200, blank=True, null=True) 
      
 
 

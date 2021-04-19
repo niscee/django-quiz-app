@@ -69,6 +69,6 @@ def courseList(request):
 @login_required(login_url=URL)
 @access(allowed=['STD'])
 def courseSingle(request, id):
-    course = CourseDetail.objects.filter(id=id)
+    course = CourseDetail.objects.get(id=id)
     context = {'course': course}
     return render(request, 'dashboard/coursesingle.html', context)     
