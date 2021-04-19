@@ -1,0 +1,79 @@
+{% extends 'dashboard/includes/master.html' %} {% block content %} {% load crispy_forms_tags %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    button {
+        width: 70px;
+    }
+</style>
+
+<div>
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <p
+        style="
+          background-color: blue;
+          color: white;
+          text-align: center;
+          padding: 10px;
+        "
+      >
+        Add Course
+      </p>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %} {% include "authentication/message.html" %} {{form|crispy}}
+        <button type="submit" class="btn btn-outline-success btn-block">
+          Submit
+        </button>
+      </form>
+    </div>
+
+    <div class="col-md-8 col-sm-12">
+        <p style="
+          background-color: blue;
+          color: white;
+          text-align: center;
+          padding: 10px;
+        "
+      >
+        Course List
+      </p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Pdf</th>
+            <th scope="col">Video</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          {% for course in courseList %}
+          <tr>
+            <td>{{course.name}}</td>
+            <td>{{course.course_id}}</td>
+            {% if course.pdf %}
+            <td><a href="{{course.pdf.url}}" target="_blank"><i class="fa fa-file-pdf-o" style="font-size:26px"></i></a></td>
+            {% else %}
+            <td>N/A</td>
+            {% endif %}
+            <td>@{{course.video}}</td>
+            <td>
+                <a href="{% url 'CourseCategory:courseEdit' course.id %}"><button class="btn btn-primary btn-sm">Edit</button></a>
+                <form method="POST" action="{% url 'CourseCategory:courseDelete' course.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                </form>
+                
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

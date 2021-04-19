@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>LMS-Dashboard</title>
+  </head>
+
+  <style>
+    .container1 {
+      margin: 20px auto;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      padding: 0px 20px;
+      width: 90%;
+      padding: 40px;
+      border-radius: 55px; 
+    }
+
+    #dashboard-heading {
+      padding: 10px;
+      background-color: blue;
+      color: white;
+      text-align: center;
+      margin: 40px auto 0px;
+      width: 90%;
+    }
+  </style>
+  <body>
+    {% include "dashboard/includes/navbar.html" %}
+    <!-- <p id="dashboard-heading">Welcome to User Dashboard</p> -->
+    <div class="container1">
+      <div class="row">
+        <div class="col-md-2 col-sm-12 col-lg-2">
+          {% include "dashboard/includes/sidebar.html" %}
+        </div>
+
+        <div
+          class="col-md-10 col-sm-12 col-lg-10"
+          style="border-style: inset; padding: 20px; overflow: scroll; height: 620px; padding: 10px;">
+          {% block content %} {% endblock %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

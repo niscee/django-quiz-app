@@ -1,0 +1,21 @@
+{% load static %}
+<!---main image-->
+      <section class="main-image">
+        <div class="content">
+          <img src="{% static 'main-image.jpg' %}" alt="main-image" />
+        </div>
+      </section>
+
+<!--product cards-->
+      <section class="product-cards">
+        {% for product in products %}
+        <div>
+          <img src="{{ product.imageURL }}" alt="" style="height: 250px; width: 100%" />
+          <h3>{{product.name}}</h3>
+          <p>
+            {{product.detail|truncatechars:200}}
+          </p>
+          <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
+        </div>
+        {% endfor %}
+      </section>

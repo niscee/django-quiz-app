@@ -1,0 +1,53 @@
+{% extends 'layout/master.html' %} {% block content %}
+
+<style>
+  button {
+    background-color: white;
+    color: black;
+    padding: 5px;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  button:hover {
+    background-color: black;
+    color: white;
+  }
+</style>
+
+
+
+
+<!--login form-->
+<div id="login-heading"><p>Login Form</p></div>
+
+<div class="login">
+  <form action="{% url 'Authentication:login' %}" method="POST">
+    {% csrf_token %}
+
+    {% include "authentication/message.html" %}
+    
+    <div>
+      <label for="fname">Username:</label>
+      <input type="text" name="username" />
+    </div>
+    <div>
+      <label for="fname">Password:</label>
+      <input type="password" name="password" />
+    </div>
+    <div style="margin-top: 10px">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+  <div style="margin-top: 40px">
+    <h5>
+      If you havent sign up, click here
+      <a
+        href="{% url 'Authentication:register' %}"
+        style="text-decoration: underline"
+        >sign up</a
+      >
+    </h5>
+  </div>
+</div>
+{% endblock %}

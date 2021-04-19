@@ -1,0 +1,38 @@
+{% extends 'dashboard/includes/master.html' %} {% block content %}
+
+<style>
+img:hover {
+  transition: 1s;
+  transform: scale(0.9);
+}
+
+p{
+    text-decoration: underline;
+}
+
+button {
+    display: block;
+    width: 100%;  
+    margin: auto;
+}
+
+
+</style>
+
+
+<div>
+  <div class="row" style="padding: 10px;">
+
+    {% for course in courseList %}
+      <div class="card col-md-3 col-sm-6" style="margin-top: 5px;" id="carddiv">
+        <img class="card-img-top" src="{{course.imageURL}}" alt="Course img" style="height: 200px; width: 100%" />
+        <div class="card-body">
+          <p class="card-text" style="text-align: center;">{{course.name}}</p>
+          <a href="{% url 'CourseCategory:courseSingle' course.id %}"><button class="btn btn-sm btn-outline-success">Take Course</button></a>
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'layout/master.html' %} {% block content %}
+
+<style>
+  button {
+    background-color: white;
+    color: black;
+    padding: 5px;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  button:hover {
+    background-color: black;
+    color: white;
+  }
+</style>
+
+<!--register form-->
+
+      <div
+        id="register-heading"
+        style="
+          background-color: #0067b8;
+          color: white;
+          text-align: center;
+          padding: 5px;
+          width: 700px;
+          margin: 50px auto 0px;
+        "
+      >
+        <p>Registration Form</p>
+      </div>
+
+      
+      
+      <div
+        class="register"
+        style="
+          width: 700px;
+          margin: auto;
+          border: 1px solid black;
+          padding: 20px;
+        "
+      >
+        <form method="POST">
+          {% csrf_token %} 
+          {% include "authentication/message.html" %}
+          {{ form }}
+          <button type="submit" class="btn btn-success">Register</button>
+        </form>
+      </div>
+
+{% endblock %}
