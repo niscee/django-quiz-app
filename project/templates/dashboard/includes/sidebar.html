@@ -1,14 +1,16 @@
 <ul class="list-group" style="list-style-type: None;">
   <li class="list-group-item"><a href="{% url 'Dashboard:dashboard' %}">Home</a></li>
   <li class="list-group-item"><a href="{% url 'Dashboard:profile' %}">Profile</a></li>
-  <li class="list-group-item"><a href="#">Quiz</a></li>
+  
 
   {% if request.user.userprofile.user_type == "TEC" %}
   <li class="list-group-item"><a href="{% url 'CourseCategory:course' %}">Course</a></li>
+  <li class="list-group-item"><a href="{% url 'Quiz:quiz' %}">Quiz</a></li>
   {% endif %}
 
   {% if request.user.userprofile.user_type == "STD" %}
   <li class="list-group-item"><a href="{% url 'CourseCategory:courseList' %}">Course</a></li>
+  <li class="list-group-item"><a href="#">Quiz</a></li>
   {% endif %}
 
 </ul>

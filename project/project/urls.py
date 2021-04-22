@@ -23,4 +23,5 @@ urlpatterns = [
          'Authentication'), namespace='Authentication')),
     path('dashboard/', include(('Dashboard.urls', 'Dashboard'), namespace='Dashboard')),
     path('course/', include(('CourseCategory.urls', 'CourseCategory'), namespace='CourseCategory')),
+    path('quiz/', include(('Quiz.urls', 'Quiz'), namespace='Quiz')),
 ]

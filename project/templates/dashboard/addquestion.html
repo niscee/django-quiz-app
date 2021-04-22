@@ -1,0 +1,20 @@
+{% extends 'dashboard/includes/master.html' %} {% block content %}
+{% load crispy_forms_tags %}
+
+<div
+        class="register"
+        style="
+          width: 800px;
+          margin: auto;
+          padding: 20px;
+        "
+      >
+        <p style="background-color: blue; color: white; text-align: center; padding: 10px">Question Form</p>
+        <form method="POST">
+          {% csrf_token %} 
+          {% include "authentication/message.html" %}
+          {{ QUIZ_FORM|crispy }}
+          <button type="submit" class="btn btn-outline-success btn-block">Update</button>
+        </form>
+      </div>
+{% endblock %}
