@@ -1,5 +1,6 @@
 from django.db import models
 from CourseCategory.models import CourseCategory
+from django.conf import settings
 
 # Create your models here.
 class Question(models.Model):
@@ -18,6 +19,10 @@ class Question(models.Model):
 
 
 
- 
+# check quiz status
+class QuizAttempt(models.Model):
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE)
+    status = models.BooleanField(default=False)    
 
 

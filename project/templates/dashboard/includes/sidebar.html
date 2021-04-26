@@ -10,7 +10,7 @@
 
   {% if request.user.userprofile.user_type == "STD" %}
   <li class="list-group-item"><a href="{% url 'CourseCategory:courseList' %}">Course</a></li>
-  <li class="list-group-item"><a href="#">Quiz</a></li>
+  <li class="list-group-item"><a href="{% url 'Quiz:startQuiz' %}">Quiz</a></li>
   {% endif %}
 
 </ul>

@@ -55,3 +55,6 @@ def editQuestion(request, id):
 
 
 # student controller.
+def startQuiz(request):
+    context = {}
+    return render(request, 'dashboard/startquiz.html', context)
