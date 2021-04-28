@@ -12,7 +12,8 @@ URL = 'Authentication:login'
 # admin dashboard home page.
 @login_required(login_url=URL)
 def dashboard(request):
-    context = {}
+    user = UserProfile.objects.get(user_id=request.user)
+    context = {'user': user}
     return render(request, 'dashboard/main.html', context)
 
 
@@ -22,7 +23,7 @@ def profile(request):
     user_profile_id = UserProfile.objects.get(user_id=request.user.id)
 
     if request.method == "POST":
-        user_profile_form = UserProfileForm(request.POST, instance=user_profile_id)
+        user_profile_form = UserProfileForm(request.POST, request.FILES, instance=user_profile_id)
         user_form = UpdateRegisterForm(request.POST, instance=request.user)
         if user_profile_form and user_form.is_valid():
             user_profile_form.save()

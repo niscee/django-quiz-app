@@ -19,20 +19,24 @@ button {
 
 </style>
 
+<div class="card">
+  <div class="card-header">All Course</div>
+  <div class="card-body" id="course">
+    <div class="row" style="padding: 10px;">
 
-<div>
-  <div class="row" style="padding: 10px;">
-
-    {% for course in courseList %}
-      <div class="card col-md-3 col-sm-6" style="margin-top: 5px;" id="carddiv">
-        <img class="card-img-top" src="{{course.imageURL}}" alt="Course img" style="height: 200px; width: 100%" />
-        <div class="card-body">
-          <p class="card-text" style="text-align: center;">{{course.name}}</p>
-          <a href="{% url 'CourseCategory:courseSingle' course.id %}"><button class="btn btn-sm btn-outline-success">Take Course</button></a>
+      {% for course in courseList %}
+        <div class="card col-md-3 col-sm-6" style="margin-top: 5px;" id="carddiv">
+          <img class="card-img-top" src="{{course.imageURL}}" alt="Course img" style="height: 200px; width: 100%" />
+          <div class="card-body">
+            <p class="card-text" style="text-align: center;">{{course.name}}</p>
+            <a href="{% url 'CourseCategory:courseSingle' course.id %}"><button class="btn btn-sm btn-outline-success">Take Course</button></a>
+          </div>
         </div>
-      </div>
-    {% endfor %}
-
+      {% endfor %}
+  
+    </div>
   </div>
 </div>
+
+
 {% endblock %}

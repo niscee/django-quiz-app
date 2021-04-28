@@ -16,7 +16,7 @@ class UserProfile(models.Model):
     ]
 
     address = models.CharField(max_length=200, blank=True, null=True)
-    image = models.ImageField(upload_to="UserProfile")
+    image = models.ImageField(upload_to="UserProfile", null=True, blank=True)
     user_id = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -31,6 +31,15 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return str(self.user_id)
+
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url     
     
 
 

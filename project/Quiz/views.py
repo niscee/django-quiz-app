@@ -12,7 +12,7 @@ URL = 'Authentication:login'
 def home(request):
     questions = Question.objects.order_by('id')
     context = {'questions': questions}
-    return render(request, 'dashboard/quiz.html', context)
+    return render(request, 'dashboard/quizlist.html', context)
 
 @login_required(login_url=URL)
 def addQuestion(request):
@@ -56,5 +56,15 @@ def editQuestion(request, id):
 
 # student controller.
 def startQuiz(request):
+    context = {}
+    return render(request, 'dashboard/startquiz.html', context)
+
+
+
+def QuizProgress(request):
+    attempt, created = QuizAttempt.objects.get_or_create(
+            user_id = request.user.id,
+            status = False
+        )
     context = {}
     return render(request, 'dashboard/startquiz.html', context)

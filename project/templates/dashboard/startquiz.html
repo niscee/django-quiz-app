@@ -1,10 +1,15 @@
 {% extends 'dashboard/includes/master.html' %} {% block content %}
 {% load crispy_forms_tags %}
 
-<div class="register" style="
-          width: 800px;
-          margin: auto;
-          padding: 20px;
-        ">
+<div class="card">
+    <div class="card-header">Quiz</div>
+    <div class="card-body" id="course">
+      <div class="jumbotron">
+          <h3>Start the Quiz</h3><br>
+          <p>Good Luck!</p><br>
+          <button class="btn btn-success btn-lg">Start The Quiz</button>
+      </div>
+    </div>
 </div>
+
 {% endblock %}
