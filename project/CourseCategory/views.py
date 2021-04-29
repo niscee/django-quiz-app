@@ -7,6 +7,9 @@ from .decorators import access
 
 # Create your views here.
 URL = 'Authentication:login'
+TUTORURL = 'dashboard/course/teacher'
+STUDURL = 'dashboard/course/student'
+
 
 @login_required(login_url=URL)
 @access(allowed=['TEC'])
@@ -24,10 +27,11 @@ def courseAssign(request):
     form = CourseDetailForm()
     courseList = CourseDetail.objects.order_by('-id').filter(user_id=USER)       
     context = {'form': form, 'courseList': courseList}
-    return render(request, 'dashboard/coursedetails.html', context)
+    return render(request, f'{TUTORURL}/coursedetails.html', context)
 
 
 @login_required(login_url=URL)
+@access(allowed=['TEC'])
 def courseDelete(request, id):
     course = CourseDetail.objects.get(id=id) 
     if course:
@@ -37,10 +41,11 @@ def courseDelete(request, id):
     
     context = {}
     messages.success(request, 'something went wrong!!')
-    return render(request, 'dashboard/coursedetails.html', context) 
+    return render(request, f'{TUTORURL}/coursedetails.html', context) 
 
 
 @login_required(login_url=URL)
+@access(allowed=['TEC'])
 def courseEdit(request, id):
     course = CourseDetail.objects.get(id=id)
     if request.method == "POST":
@@ -53,7 +58,7 @@ def courseEdit(request, id):
 
     form = CourseDetailForm(instance=course)       
     context = {'form': form}
-    return render(request, 'dashboard/coursedetails_update.html', context) 
+    return render(request, f'{TUTORURL}/coursedetails_update.html', context) 
 
 
 
@@ -63,7 +68,7 @@ def courseEdit(request, id):
 def courseList(request):
     courseList = CourseDetail.objects.order_by('-id')
     context = {'courseList': courseList}
-    return render(request, 'dashboard/courselist.html', context) 
+    return render(request, f'{STUDURL}/courselist.html', context) 
 
 
 @login_required(login_url=URL)
@@ -71,4 +76,4 @@ def courseList(request):
 def courseSingle(request, id):
     course = CourseDetail.objects.get(id=id)
     context = {'course': course}
-    return render(request, 'dashboard/coursesingle.html', context)     
+    return render(request, f'{STUDURL}/coursesingle.html', context)     

@@ -30,6 +30,7 @@ button {
           <div class="card-body">
             <p class="card-text" style="text-align: center;">{{course.name}}</p>
             <a href="{% url 'CourseCategory:courseSingle' course.id %}"><button class="btn btn-sm btn-outline-success">Take Course</button></a>
+            
           </div>
         </div>
       {% endfor %}

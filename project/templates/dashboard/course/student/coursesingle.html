@@ -3,7 +3,7 @@
 <style>
   #course {
     display: grid;
-    grid-template-columns: 800px auto;
+    grid-template-columns: 75% auto;
   }
 </style>
 <div class="card">
@@ -17,14 +17,19 @@
       >
       </iframe>
     </div>
-    <div class="card border-dark" style="max-width: 100%">
+
+    <div>
       <div class="card-header">Course Details</div>
       <div class="card-body text-dark">
-        <h5 class="card-title">{{course.name}}</h5>
-        <p class="card-text">
-          Tutor: {{course.user_id.username}}<br />
-          Details: {{course.detail}}<br />
-          {% if course.pdf %} Document:
+        <h5 class="card-title">{{course.name | upper}}</h5>
+        <p class="card-text" style="line-height: 3.5;">
+          <u>Tutor</u>:
+          {{course.user_id.username}}<br />
+          <u>Tutor-Email</u>:
+          {{course.user_id}}<br />
+          <u>Details</u>:
+          {{course.detail}}<br />
+          {% if course.pdf %} <u>Document</u>:
           <a href="{{course.pdf.url}}" target="_blank"
             ><button class="btn btn-sm btn-outline-success">Download</button></a
           >
@@ -32,6 +37,7 @@
         </p>
       </div>
     </div>
+
   </div>
 </div>
 

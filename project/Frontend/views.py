@@ -5,4 +5,4 @@ from CourseCategory.models import Product
 def index(request):
     products = Product.objects.order_by('id')
     context = {'products': products}
-    return render(request, 'layout/index.html', context)
+    return render(request, 'frontend/layout/index.html', context)

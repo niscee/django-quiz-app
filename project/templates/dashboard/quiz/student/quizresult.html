@@ -1,0 +1,20 @@
+{% extends 'dashboard/includes/master.html' %} {% block content %}
+{% load crispy_forms_tags %}
+
+<div class="card">
+    <div class="card-header">Quiz</div>
+    <div class="card-body" id="course">
+        <div class="jumbotron" style="padding: 10px; text-align: center; line-height: 5; height: 400px;">
+            <div style="padding-top: 100px;">
+                <h1>Quiz Result:</h1>
+                <h6>{{qscore.score}} out of {{quesLen}}</h6>
+                <h6>{{qscore.percentage}}%</h6>
+                <a href="{% url 'Quiz:startQuiz' %}"><button class="btn btn-bg btn-success">Try Again</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

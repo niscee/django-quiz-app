@@ -1,0 +1,77 @@
+{% extends 'dashboard/includes/master.html' %} {% block content %}
+{% load crispy_forms_tags %}
+
+<div class="card">
+    <div class="card-header">Quiz</div>
+    <div class="card-body" id="course">
+        <div class="jumbotron" style="padding: 10px;">
+            <h2>Total Questions: {{ count }}</h2><hr><br>
+
+
+            <form action="{% url 'Quiz:submitQuiz' %}" method="POST">
+                {% csrf_token %}
+                
+                <input type="hidden" value="{{attempt.id}}" name="quizattempt_id">
+
+                {% for q in qlist %}
+            
+                <h5>{{q.question}}</h5>
+                <div class="radio">
+                    <label><input type="radio" name="{{q.id}}" value="{{q.option1}}" required> {{q.option1}}</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="{{q.id}}" value="{{q.option2}}" required> {{q.option2}}</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="{{q.id}}" value="{{q.option3}}" required> {{q.option3}}</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="{{q.id}}" value="{{q.option4}}" required> {{q.option4}}</label>
+                </div>
+                <hr>
+                {% endfor %}
+
+
+                <button class="btn btn-success btn-sm" id="submit" type="submit">SUBMIT</button>
+            </form>
+            
+            <br>
+
+            <!-- {% if qlist.has_other_pages %}
+            <nav aria-label="Page navigation conatiner"></nav>
+            <ul class="pagination justify-content-center">
+                {% if qlist.has_previous %}
+                <li><a href="?page={{ qlist.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+                {% endif %}
+                {% if qlist.has_next %}
+                <li><a href="?page={{ qlist.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+                {% endif %}
+            </ul>
+            </nav>
+            {% endif %} -->
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <script>
+
+    // getting radio value on button clicked.
+    function getval(e) {
+        event.preventDefault();
+        var radios = document.getElementsByName("ans");
+        var len = radios.length;
+        for (var i = 0; i < len; i++) {
+            if (radios[i].checked == true) {
+                console.log(radios[i].value);
+            }
+        }
+    }
+
+
+
+</script> -->
+
+{% endblock %}

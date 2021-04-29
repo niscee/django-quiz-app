@@ -33,4 +33,4 @@ def profile(request):
     USERPROFILE_FORM = UserProfileForm(instance=user_profile_id)
     USER_FORM = UpdateRegisterForm(instance=request.user)
     context = {'USERPROFILE_FORM': USERPROFILE_FORM, 'USER_FORM': USER_FORM}
-    return render(request, 'dashboard/profile.html', context)
+    return render(request, 'dashboard/userprofile/profile.html', context)

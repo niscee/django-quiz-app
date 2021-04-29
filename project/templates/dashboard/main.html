@@ -7,10 +7,8 @@
             transform: translateX(0%);
         }
 
-        
-
         to {
-            transform: translateX(100%);
+            transform: translateX(50%);
         }
 
     }
@@ -20,16 +18,21 @@
         animation-name: example;
         animation-duration: 4s;
         animation-fill-mode: forwards;
+        max-width: 50%;
+        width: 50%;
+        height: 450px;
+        border-radius: 65%;
+        padding: 10px;
     }
 </style>
 
 <div class="card">
     <div class="card-header">Home</div>
-    <div class="card-body" id="course" style="display: flex; align-items: center; flex-wrap: wrap;">
-        <h3 style="padding-left: 10px; max-width: 50%">Welcome, {{request.user.email}}</h3>
-        <div style="border: 1px solid black; padding: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-            <img src="{{user.imageURL}}" id="image" alt="user-profile"
-                style="max-width: 30%; width: 30%; height: 300px; border-radius: 65%;">
+    <div class="card-body" id="course" style="width: 90%; margin: auto">
+        <h3 style="padding-left: 10px;">Welcome, <span style="font-size: 20px;">{{request.user.email}}</span></h3>
+        <div class=""
+            style="border: 1px solid black; padding: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+            <img src="{{user.imageURL}}" id="image" alt="user-profile">
         </div>
     </div>
 </div>
