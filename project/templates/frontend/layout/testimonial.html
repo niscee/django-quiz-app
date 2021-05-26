@@ -1,0 +1,88 @@
+{% load static %}
+
+<style>
+    .testimonial {
+        /* border-style: ridge;
+        border-radius: 20px; */
+        background-color: #2F2F2F;
+        color: white;
+        padding: 50px;
+        width: 100%;
+        text-align: center;
+        line-height: 3;
+    }
+
+    .author {
+        text-decoration: underline;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    @media screen and (max-width: 1100) {
+        .testimonial {
+            width: 90%;
+            margin: auto;
+        }
+    }
+</style>
+
+
+
+<h1 style="margin-top: 80px">Testimonial</h1>
+<section class="testimonial">
+
+    <div class="testi-content">
+        <q>I am really impressed by the quality of services I received from Prayoga. She was right
+            on schedule, charged reasonable prices, was professional and courteous in dealings, and delivered
+            items well before time.</q>
+        <p class="author">Pramod Khadki</p>
+    </div>
+
+    <div class="testi-content">
+        <q>I wanted to take a moment to thank you for the services you have provided. You have been a
+            pleasure to work with, professional and timely. The only delay in work that we have experienced has
+            been due to our own lack of organization managing our projects, not yours. Job well done and I hope
+            we can continue to grow together.</q>
+        <p class="author">Kamal Jung Kunwar</p>
+    </div>
+
+    <div class="testi-content">
+        <q>It was pleasure working with you.</q>
+        <p class="author">Abhishek Pyakurel</p>
+    </div>
+
+
+    <center><button style="padding: 5px;" onclick="plusSlidesTest(-1)">Prev</button><button style="padding: 5px;"
+            onclick="plusSlidesTest(1)">Next</button></center>
+
+</section>
+<script>
+
+
+    var slideIndexTest = 1;
+    showSlidesTest(slideIndexTest);
+
+    function plusSlidesTest(n) {
+        showSlidesTest(slideIndexTest += n);
+    }
+
+
+    function showSlidesTest(n) {
+        var i;
+        var slides = document.getElementsByClassName("testi-content");
+
+        if (n > slides.length) {
+            slideIndexTest = 1
+        }
+
+        if (n < 1) {
+            slideIndexTest = slides.length
+        }
+
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        slides[slideIndexTest - 1].style.display = "block";
+    }
+</script>

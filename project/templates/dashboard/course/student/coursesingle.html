@@ -5,7 +5,15 @@
     display: grid;
     grid-template-columns: 75% auto;
   }
+
+  @media(max-width: 500px) {
+  #course {
+      grid-template-columns: 1fr;
+  }
+}
+
 </style>
+
 <div class="card">
   <div class="card-header">All Course / <b>{{course.course_id}}</b> </div>
   <div class="card-body" id="course">
@@ -40,5 +48,8 @@
 
   </div>
 </div>
+
+
+
 
 {% endblock %}

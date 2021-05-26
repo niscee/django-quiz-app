@@ -1,0 +1,126 @@
+{% extends 'frontend/layout/master.html' %}
+
+{% block content %}
+
+<style>
+    .dropbtn {
+        background-color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border: 1px solid black;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        text-align: center;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: white;
+    }
+
+    .dropdown:hover .dropbtn {
+        color: white;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #363636;
+    }
+
+    .product-card {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 20px;
+    }
+
+    .product-category-card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        padding: 20px;
+        margin-top: 10px;
+    }
+
+    .product-category-card:hover {
+        transition: 1s;
+        transform: rotate(-3deg);
+    }
+
+    @media screen and (max-width: 700px) {
+        .product-card {
+            display: grid;
+            grid-template-columns: 100%;
+            grid-gap: 20px;
+        }
+    }
+</style>
+
+<section class="categoryDropdown" style="width: 100%;">
+    <div class="dropdown" style="padding: 20px; width: 100%; font-size: 16px;">
+        <button class="dropbtn" style="padding: 10px; width: 100%; font-size: 18px;">Select Product Category</button>
+        <div class="dropdown-content">
+            {% for category in categories%}
+            <a href="{% url 'Frontend:product' category.id %}">{{category.name}}</a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<!--product cards-->
+
+<div class="jumbo">
+    {% if title %}
+    <h1 id="productCategory1" style="margin-top: 50px; text-align: center;"><u>Products</u> ({{title.CourseCategory_id.name }})</h1>
+    {% else %}
+    <h1 id="productCategory1" style="margin-top: 50px; text-align: center;"><u>Products</u> (All)</h1>
+    {% endif %}
+</div>
+
+
+{% if products %}
+<section class="product-card">
+
+    {% for product in products %}
+    <div class="product-category-card">
+        <img src="{{ product.imageURL }}" alt="" style="height: 250px; width: 100%" />
+        <h3>{{product.name}}</h3>
+        <p>
+            {{product.detail|truncatechars:100}}
+        </p>
+        <a href="#" style="color: darkblue; font-weight: bold;">Learn More <i class="fas fa-chevron-right"></i></a>
+    </div>
+    {% endfor %}
+
+</section>
+
+{% else %}
+<h1 style="text-align: center; margin-top: 50px; background-color: red; padding: 20px;">NO ITEM AVAILABLE</h1>
+{% endif %}
+
+
+
+
+
+{% endblock %}

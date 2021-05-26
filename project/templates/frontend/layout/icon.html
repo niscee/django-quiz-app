@@ -1,0 +1,77 @@
+{% load static %}
+
+
+<style>
+    .icons {
+        margin-top: 80px;
+    }
+
+    .section-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+
+    }
+
+    .icon-content p {
+        text-align: center;
+    }
+
+    .icon-content:hover {
+        opacity: 0.5;
+        color: red;
+    }
+
+    .cart-icon {
+        display: block;
+        width: 80px;
+        margin: auto;
+        height: 80px;
+    }
+
+    @media screen and (max-width: 1000px) {
+        h3 {
+            text-align: center;
+
+        }
+
+        .icon-content {
+            margin-top: 5px;
+        }
+
+        .section-content {
+            display: grid;
+            grid-template-columns: 100%;
+        }
+    }
+</style>
+
+<section class="icons">
+    <div class="section-content" style="width: 90%; margin: auto">
+        <div class="icon-content">
+            <img src="{% static 'frontendicon/account.png' %}" alt="cart-icon" class="cart-icon" />
+            <h3>Create Account</h3>
+        </div>
+
+        <div class="icon-content">
+            <img src="{% static 'frontendicon/course.png' %}" alt="cart-icon" class="cart-icon" />
+            <h3>Do Course</h3>
+        </div>
+
+        <div class="icon-content">
+            <img src="{% static 'frontendicon/quiz.jpeg' %}" alt="cart-icon" class="cart-icon" />
+            <h3>Take Quiz</h3>
+        </div>
+
+        <div class="icon-content">
+            <img src="{% static 'frontendicon/leaderboard.png' %}" alt="cart-icon" class="cart-icon" />
+            <h3>Compete With Others</h3>
+        </div>
+
+        <div class="icon-content">
+            <img src="{% static 'frontendicon/shop.png' %}" alt="cart-icon" class="cart-icon" />
+            <h3>Buy Products</h3>
+        </div>
+    </div>
+</section>

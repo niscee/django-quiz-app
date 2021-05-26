@@ -1,31 +1,33 @@
 {% load static %}
+
+<style>
+  @media screen and (max-width: 500px) {
+    #logo {
+      display: none;
+    }
+  }
+</style>
+
+
+
 <nav class="main-nav">
-        <img
-          src="https://www.techrepublic.com/a/hub/i/r/2020/04/27/02a8c5e8-83f9-422a-93d9-8d1fec2a190d/resize/1200x/2b88bc65e7b2d5461c4d7952d39e15cf/new-microsoft365-logo-horiz-c-gray-rgb.jpg"
-          alt="logo"
-          id="logo"
-        />
-        <ul class="main-menu-left">
-          <li><a href="{% url 'Frontend:home' %}">Home</a></li>
-          <li><a href="#">Products</a></li>
-        </ul>
-        <ul class="main-menu-right">
-          {% if request.user.is_anonymous %}
-          <li><a href="{% url 'Authentication:login' %}">Login</a></li>
-          {% else %}
-          <li>
-            <a href="{% url 'Dashboard:dashboard' %}"
-              >Dashboard</a
-            >
-          </li>
-          {% endif %}
-          <li>
-            <a href="#"
-              ><img
-                src="{% static 'cart.jpg' %}"
-                alt="cart-icon"
-                id="cart-icon"
-            /></a>
-          </li>
-        </ul>
-      </nav>
+  <img
+  src="https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/microsoft-512.png"
+  alt="logo" id="logo" />
+  <ul class="main-menu-left">
+    <li><a href="{% url 'Frontend:home' %}">Home</a></li>
+    <li><a href="{% url 'Frontend:products' %}">Products</a></li>
+  </ul>
+  <ul class="main-menu-right">
+    {% if request.user.is_anonymous %}
+    <li><a href="{% url 'Authentication:login' %}">Login</a></li>
+    {% else %}
+    <li>
+      <a href="{% url 'Dashboard:dashboard' %}">Dashboard</a>
+    </li>
+    {% endif %}
+    <li>
+      <a href="#"><img src="{% static 'cart.jpg' %}" alt="cart-icon" id="cart-icon" /></a>
+    </li>
+  </ul>
+</nav>

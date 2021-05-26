@@ -2,58 +2,93 @@
 {% load crispy_forms_tags %}
 
 <style>
-    @keyframes example {
-        from {
-            transform: translateX(0%);
-        }
-
-        to {
-            transform: translateX(20%);
-        }
-
+  @keyframes example {
+    from {
+      transform: translateX(0%);
     }
 
-    /* The element to apply the animation to */
-    #image {
-        animation-name: example;
-        animation-duration: 2s;
-        animation-fill-mode: forwards;
-        max-width: 100px;
-        width: 100px;
-        height: 80px;
-        border-radius: 35%;
-        
+    to {
+      transform: translateX(20%);
     }
+
+  }
+
+  /* The element to apply the animation to */
+  #image {
+    animation-name: example;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    max-width: 100px;
+    width: 100px;
+    height: 80px;
+    border-radius: 35%;
+
+  }
 </style>
 
 <div class="card">
-    <div class="card-header">LeaderBoard</div>
-    <div class="card-body" id="course">
-        <table class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Score</th>
-                <th>Percentage</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for p in profiles %}
-              <tr>
-                <td><img id="image" src="{{p.quizattempt_id.user_id.userprofile.imageURL}}" alt="userprofile"></td>
-                <td>{{p.quizattempt_id.user_id.username}}</td>
-                <td>{{p.quizattempt_id.user_id.email}}</td>
-                <td>{{p.score}}</td>
-                <td>{{p.percentage}}%</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+  <div class="card-header">LeaderBoard</div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <!--Table-->
+      <table class="table table-striped">
+
+        <!--Table head-->
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Score</th>
+            <th>Percentage</th>
+          </tr>
+        </thead>
+        <!--Table head-->
+
+        <!--Table body-->
+        <tbody>
+          {% for p in profiles %}
+          <tr>
+            <td><img id="image" src="{{p.quizattempt_id.user_id.userprofile.imageURL}}" alt="userprofile"></td>
+            <td>{{p.quizattempt_id.user_id.username}}</td>
+            <td>{{p.quizattempt_id.user_id.email}}</td>
+            <td>{{p.score}}</td>
+            <td>{{p.percentage}}%</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <!--Table body-->
+      </table>
+      <!--Table-->
     </div>
+  </div>
 </div>
 
 
 
 {% endblock %}
+
+
+
+<!-- <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Score</th>
+      <th>Percentage</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in profiles %}
+    <tr>
+      <td><img id="image" src="{{p.quizattempt_id.user_id.userprofile.imageURL}}" alt="userprofile"></td>
+      <td>{{p.quizattempt_id.user_id.username}}</td>
+      <td>{{p.quizattempt_id.user_id.email}}</td>
+      <td>{{p.score}}</td>
+      <td>{{p.percentage}}%</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table> -->

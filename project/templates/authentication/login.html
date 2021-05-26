@@ -13,20 +13,49 @@
     background-color: black;
     color: white;
   }
+
+  /* loging-form */
+  .login {
+    width: 60%;
+    margin: 0 auto;
+    border: 1px solid black;
+    padding: 40px;
+    height: 450px;
+    box-shadow: 10px 10px 5px #aaaaaa;
+    font-size: 18px;
+  }
+
+  div #login-heading {
+    background-color: #0067b8;
+    padding: 30px;
+    width: 60%;
+    margin: 100px auto 0px;
+    text-align: center;
+    color: white;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
 </style>
 
 
 
 
 <!--login form-->
-<div id="login-heading"><p>Login Form</p></div>
+<div id="login-heading">
+  <h2>Login Form</h2>
+</div>
 
 <div class="login">
   <form action="{% url 'Authentication:login' %}" method="POST">
     {% csrf_token %}
 
     {% include "authentication/message.html" %}
-    
+
     <div>
       <label for="fname">Username:</label>
       <input type="text" name="username" />
@@ -42,11 +71,7 @@
   <div style="margin-top: 40px">
     <h5>
       If you havent sign up, click here
-      <a
-        href="{% url 'Authentication:register' %}"
-        style="text-decoration: underline"
-        >sign up</a
-      >
+      <a href="{% url 'Authentication:register' %}" style="text-decoration: underline">sign up</a>
     </h5>
   </div>
 </div>

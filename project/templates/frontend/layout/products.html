@@ -1,21 +1,49 @@
 {% load static %}
-<!---main image-->
-      <section class="main-image">
-        <div class="content">
-          <img src="{% static 'main-image.jpg' %}" alt="main-image" />
-        </div>
-      </section>
+
+<style>
+  .product-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    margin: 5px 0px;
+  }
+
+  .product-img {
+    max-width: 100%;
+  }
+
+  .product-img:hover {
+    opacity: 0.2;
+  }
+
+  .jumbo {
+    padding: 15px;
+    margin-top: 25px;
+  }
+
+  @media screen and (max-width: 700px) {
+    .product-cards {
+      display: grid;
+      grid-template-columns: 100%;
+    }
+  }
+</style>
 
 <!--product cards-->
-      <section class="product-cards">
-        {% for product in products %}
-        <div>
-          <img src="{{ product.imageURL }}" alt="" style="height: 250px; width: 100%" />
-          <h3>{{product.name}}</h3>
-          <p>
-            {{product.detail|truncatechars:200}}
-          </p>
-          <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
-        </div>
-        {% endfor %}
-      </section>
+
+<div class="jumbo">
+  <h1 id="productCategory1" style="margin-top: 80px;">Latest Products </h1>
+</div>
+
+<section class="product-cards">
+  {% for product in products %}
+  <div>
+    <img src="{{ product.imageURL }}" alt="" style="height: 250px; width: 100%" class="product-img"/>
+    <h3>{{product.name}}</h3>
+    <p>
+      {{product.detail|truncatechars:200}}
+    </p>
+    <a href="#" style="color: darkblue; font-weight: bold;">Learn More <i class="fas fa-chevron-right"></i></a>
+  </div>
+  {% endfor %}
+</section>

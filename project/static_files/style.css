@@ -1,0 +1,106 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #ffff;
+  color: #000;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+a {
+  color: #262626;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  width: 95%;
+  max-width: 1600px;
+  margin: auto;
+}
+
+#logo {
+  width: 100px;
+  height: 100px;
+}
+
+#cart-icon {
+  width: 32px;
+  height: 30px;
+}
+
+/* navbar */
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 20px 0px;
+  font-size: 15px;
+}
+
+/* navbar menu-left */
+.main-menu-left {
+  display: flex;
+  flex: 1;
+  margin-left: 20px;
+}
+
+.main-menu-left li {
+  padding: 10px;
+}
+
+/* navbar menu-right */
+.main-menu-right {
+  display: flex;
+  align-items: center;
+}
+
+.main-menu-right li {
+  padding-left: 10px;
+}
+
+/* loging-form */
+.login {
+  width: 800px;
+  margin: auto;
+  border: 1px solid black;
+  padding: 40px;
+  height: 450px;
+  box-shadow: 10px 10px 5px #aaaaaa;
+  font-size: 18px;
+}
+
+div #login-heading {
+  background-color: #0067b8;
+  padding: 30px;
+  width: 800px;
+  margin: 100px auto 0px;
+  text-align: center;
+  color: white;
+}
+
+input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 480px) {
+  .slider img {
+    margin-top: 30px;
+  }
+}

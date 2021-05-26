@@ -6,6 +6,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='home'),
+    path('products/', views.products, name='products'),
+    path('<int:id>/product/', views.singleProduct, name='product'),
 ]
 
 if settings.DEBUG:
