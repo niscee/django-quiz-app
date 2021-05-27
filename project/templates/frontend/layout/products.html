@@ -40,10 +40,10 @@
   <div>
     <img src="{{ product.imageURL }}" alt="" style="height: 250px; width: 100%" class="product-img"/>
     <h3>{{product.name}}</h3>
-    <p>
+    <p style="padding-bottom: 5px;">
       {{product.detail|truncatechars:200}}
     </p>
-    <a href="#" style="color: darkblue; font-weight: bold;">Learn More <i class="fas fa-chevron-right"></i></a>
+    <a href="#" style="color: darkblue; font-weight: bold;">Learn More ><i class="fas fa-chevron-right"></i></a>
   </div>
   {% endfor %}
 </section>

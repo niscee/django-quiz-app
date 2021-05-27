@@ -23,7 +23,7 @@ class Question(models.Model):
 class QuizAttempt(models.Model):
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE)
-    status = models.BooleanField(default=False) 
+    status = models.BooleanField(default=False)
 
 
     def __str__(self):

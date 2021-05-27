@@ -17,7 +17,7 @@
 
 <style>
   .container1 {
-    padding: 20px;
+    padding: 30px;
     width: 98%;
     margin: auto;
   }
@@ -40,8 +40,8 @@
     <div class="row">
       <div class="col-md-2 col-sm-12 col-lg-2">
         <div style="background-color: white; margin-bottom: 50px; height: 100px;">
-          <img src="https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/microsoft-512.png" alt="logo" id="logo"
-            style="height: 100px; width: 100px; display: block; margin: auto;">
+          <img src="{% static 'frontendicon/logo.png' %}" alt="logo" id="logo"
+            style="height: 100%; width: 50%; display: block; margin: 0px auto;">
         </div>
         {% include "dashboard/includes/sidebar.html" %}
       </div>
@@ -73,7 +73,7 @@
 
         </div>
 
-        <div style="padding: 10px; box-sizing: border-box; background-color: white">
+        <div style="padding: 20px; box-sizing: border-box; background-color: white">
           {% block content %} {% endblock %}
         </div>
       </div>

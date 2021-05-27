@@ -1,22 +1,25 @@
 {% load static %}
 
 <style>
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 800px) {
     #logo {
       display: none;
+    }
+
+    .main-nav {
+      font-size: 10px;
     }
   }
 </style>
 
 
 
-<nav class="main-nav">
-  <img
-  src="https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/microsoft-512.png"
-  alt="logo" id="logo" />
+<nav class="main-nav" style="margin-bottom: 20px;">
+  <img src="{% static 'frontendicon/logo.png' %}" alt="logo" id="logo" />
   <ul class="main-menu-left">
     <li><a href="{% url 'Frontend:home' %}">Home</a></li>
     <li><a href="{% url 'Frontend:products' %}">Products</a></li>
+    <li><a href="{% url 'Frontend:products' %}">Contact</a></li>
   </ul>
   <ul class="main-menu-right">
     {% if request.user.is_anonymous %}
@@ -29,10 +32,10 @@
     <li>
       <a href="#"><img src="{% static 'cart.jpg' %}" alt="cart-icon" id="cart-icon" /></a>
     </li>
+    {% if request.user.is_authenticated %}
     <li style="padding-left: 0px;">
-      <span style="background-color: red; border-radius: 50%; padding: 8px;">3</span>
+      <span style="background-color: red; border-radius: 50%; padding: 8px;">{{userCartStatus.cartTotalQty}}</span>
     </li>
+    {% endif %}
   </ul>
 </nav>
-
-
