@@ -1,18 +1,36 @@
-<ul class="list-group" style="list-style-type: None;">
-  <li class="list-group-item"><a href="{% url 'Dashboard:dashboard' %}">Home</a></li>
-  <li class="list-group-item"><a href="{% url 'Dashboard:profile' %}">Profile</a></li>
-  <li class="list-group-item"><a href="{% url 'Quiz:leaderBoard' %}">LeaderBoard</a></li>
-  
+<style>
+  a {
+    color: black;
+  }
+</style>
+
+<div style="line-height: 2;">
+  <a href="{% url 'Dashboard:dashboard' %}">
+    <p><i class="fa fa-home"></i> Home</p>
+  </a>
+  <a href="{% url 'Dashboard:profile' %}">
+    <p><i class="fa fa-address-book"></i> Profile</p> 
+  </a>
+  <a href="{% url 'Quiz:leaderBoard' %}">
+    <p><i class="fa fa-bar-chart"></i> LeaderBoard</p>
+  </a>
+
 
   {% if request.user.userprofile.user_type == "TEC" %}
-  <li class="list-group-item"><a href="{% url 'CourseCategory:course' %}">Course</a></li>
-  <li class="list-group-item"><a href="{% url 'Quiz:quiz' %}">Quiz</a></li>
+  <a href="{% url 'CourseCategory:course' %}">
+    <p><i class="fa fa-book"></i> Course</p>
+  </a>
+  <a href="{% url 'Quiz:quiz' %}">
+    <p><i class="fa fa-keyboard-o"></i> Quiz</p>
+  </a>
   {% endif %}
 
   {% if request.user.userprofile.user_type == "STD" %}
-  <li class="list-group-item"><a href="{% url 'CourseCategory:courseList' %}">Course</a></li>
-  <li class="list-group-item"><a href="{% url 'Quiz:startQuiz' %}">Quiz</a></li>
+  <a href="{% url 'CourseCategory:courseList' %}">
+    <p><i class="fa fa-book"></i> Course</p>
+  </a>
+  <a href="{% url 'Quiz:startQuiz' %}">
+    <p><i class="fa fa-keyboard-o"></i> Quiz</p>
+  </a>
   {% endif %}
-
-</ul>
-
+</div>

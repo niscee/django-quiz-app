@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from UserProfile.forms import UserProfileForm
 from Authentication.forms import UpdateRegisterForm
-from UserProfile.models import *
+from UserProfile.models import * 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 

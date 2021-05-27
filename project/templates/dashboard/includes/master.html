@@ -1,55 +1,106 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <title>LMS-Dashboard</title>
-  </head>
 
-  <style>
-   
-    .container1 {
-      margin: 20px auto;
-      /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19); */
-      padding: 0px 20px;
-      width: 90%;
-      padding: 40px;
-      
-    }
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static './lightblue.css' %}" id="mySheet">
+  <title>LMS-Dashboard</title>
+</head>
 
-    #dashboard-heading {
-      padding: 10px;
-      background-color: blue;
-      color: white;
-      text-align: center;
-      margin: 40px auto 0px;
-      width: 90%;
+<style>
+  .container1 {
+    padding: 20px;
+    width: 98%;
+    margin: auto;
+  }
+
+  .nav-right li {
+    padding-left: 5px;
+  }
+  
+  @media screen and (max-width: 800px) {
+    #right-headnav {
+      display: none;
     }
-  </style>
-  <body>
-    {% include "dashboard/includes/navbar.html" %}
-    <!-- <p id="dashboard-heading">Welcome to User Dashboard</p> -->
-    <div class="container1">
-      <div class="row">
-        <div class="col-md-2 col-sm-12 col-lg-2">
-          {% include "dashboard/includes/sidebar.html" %}
+  }
+</style>
+
+<body>
+
+
+  <div class="container1">
+    <div class="row">
+      <div class="col-md-2 col-sm-12 col-lg-2">
+        <div style="background-color: white; margin-bottom: 50px; height: 100px;">
+          <img src="https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/microsoft-512.png" alt="logo" id="logo"
+            style="height: 100px; width: 100px; display: block; margin: auto;">
+        </div>
+        {% include "dashboard/includes/sidebar.html" %}
+      </div>
+
+      <div class="col-md-10 col-sm-12 col-lg-10">
+        <div style="background-color: white; margin-bottom: 20px; height: 100px; display: flex; align-items: center; padding: 0px 10px; justify-content: space-between; flex-wrap: wrap;">
+
+          <ul style="display: flex; list-style-type: none; align-items: center;" id="ul-left">
+            <li><a href=""><img src="{{request.user.userprofile.imageURL}}" alt="user-profile"
+                  style="width: 80px; height: 55px; border-radius: 80%; border: 1px solid black;"></li>
+            <li><a href="" style="padding-left: 20px;">{{request.user}}</a></li>
+          </ul>
+
+
+          <ul class="nav-right" style="display: flex; list-style-type: none; align-items: center;">
+            <li onclick="changeTheme('wheat.css')"><a><i class="fa fa-circle changecolor"
+                  style="font-size:20px; color: #F5DEB3"></a></i></li>
+            <li onclick="changeTheme('aquamarine.css')"><a><i class="fa fa-circle changecolor"
+                  style="font-size:20px; color: #7FFFD4"></a></i></li>
+            <li onclick="changeTheme('lightblue.css')"><a><i class="fa fa-circle changecolor"
+                  style="font-size:20px; color: #E6E6FA"></a></i></li>
+            <li onclick="changeTheme('green.css')"><a><i class="fa fa-circle changecolor"
+                  style="font-size:20px; color: #8FBC8F"></i></a></li>
+            <li><a class="nav-link" href="{% url 'Frontend:home' %}" title="view site"><i class="fa fa-home"
+                  style="font-size:30px"></i></a></li>
+            <li><a class="nav-link" href="{% url 'Authentication:logout' %}" title="logout"><i class="fa fa-sign-out"
+                  style="font-size:30px"></i></a></li>
+          </ul>
+
         </div>
 
-        <div
-          class="col-md-10 col-sm-12 col-lg-10"
-          style="padding: 0px;height: 800px; padding: 10px;">
+        <div style="padding: 10px; box-sizing: border-box; background-color: white">
           {% block content %} {% endblock %}
         </div>
       </div>
     </div>
-  </body>
+  </div>
+
+
+</body>
+
+
+<script>
+  var cssFile = '{% static './' %}';
+
+  var setTheme = localStorage.getItem('theme');
+
+  if (setTheme == null) {
+    changeTheme("lightblue.css")
+  }
+  else {
+    changeTheme(setTheme);
+  }
+
+
+  function changeTheme(sheet) {
+    document.getElementById("mySheet").href = cssFile + sheet;
+    localStorage.setItem("theme", sheet);
+  }
+</script>
+
 </html>
