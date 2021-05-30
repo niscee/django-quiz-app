@@ -4,6 +4,8 @@ from Authentication.forms import UpdateRegisterForm
 from UserProfile.models import * 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from CourseCategory.models import CourseCategory, CourseDetail, Product
+from Quiz.models import Question
 
 
 
@@ -13,7 +15,11 @@ URL = 'Authentication:login'
 @login_required(login_url=URL)
 def dashboard(request):
     user = UserProfile.objects.get(user_id=request.user)
-    context = {'user': user}
+    category = CourseCategory.objects.all()
+    course = CourseDetail.objects.all()
+    product = Product.objects.all()
+    question = Question.objects.all()
+    context = {'user': user, 'category': category, 'course': course, 'product': product, 'question': question}
     return render(request, 'dashboard/main.html', context)
 
 

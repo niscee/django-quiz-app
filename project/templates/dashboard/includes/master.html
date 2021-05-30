@@ -30,6 +30,16 @@
     #right-headnav {
       display: none;
     }
+
+    .ul-left{
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 980px) {
+    .fas {
+      display: none;
+    }
   }
 </style>
 
@@ -41,7 +51,7 @@
       <div class="col-md-2 col-sm-12 col-lg-2">
         <div style="background-color: white; margin-bottom: 50px; height: 100px;">
           <img src="{% static 'frontendicon/logo.png' %}" alt="logo" id="logo"
-            style="height: 100%; width: 50%; display: block; margin: 0px auto;">
+            style="height: 100%; width: 40%; display: block; margin: 0px auto;">
         </div>
         {% include "dashboard/includes/sidebar.html" %}
       </div>
@@ -49,21 +59,21 @@
       <div class="col-md-10 col-sm-12 col-lg-10">
         <div style="background-color: white; margin-bottom: 20px; height: 100px; display: flex; align-items: center; padding: 0px 10px; justify-content: space-between; flex-wrap: wrap;">
 
-          <ul style="display: flex; list-style-type: none; align-items: center;" id="ul-left">
-            <li><a href=""><img src="{{request.user.userprofile.imageURL}}" alt="user-profile"
+          <ul style="display: flex; list-style-type: none; align-items: center;">
+            <li class="ul-left"><a href=""><img src="{{request.user.userprofile.imageURL}}" alt="user-profile"
                   style="width: 80px; height: 55px; border-radius: 80%; border: 1px solid black;"></li>
-            <li><a href="" style="padding-left: 20px;">{{request.user}}</a></li>
+            <li class="ul-left"><a href="" style="padding-left: 20px;">{{request.user}}</a></li>
           </ul>
 
 
-          <ul class="nav-right" style="display: flex; list-style-type: none; align-items: center;">
-            <li onclick="changeTheme('wheat.css')"><a><i class="fa fa-circle changecolor"
+          <ul class="nav-right" style="display: flex; list-style-type: none; align-items: center; flex: wrap">
+            <li onclick="changeTheme('wheat.css')"><a><i class="fa fa-circle changecolor fas"
                   style="font-size:20px; color: #F5DEB3"></a></i></li>
-            <li onclick="changeTheme('aquamarine.css')"><a><i class="fa fa-circle changecolor"
+            <li onclick="changeTheme('aquamarine.css')"><a><i class="fa fa-circle changecolor fas"
                   style="font-size:20px; color: #7FFFD4"></a></i></li>
-            <li onclick="changeTheme('lightblue.css')"><a><i class="fa fa-circle changecolor"
+            <li onclick="changeTheme('lightblue.css')"><a><i class="fa fa-circle changecolor fas"
                   style="font-size:20px; color: #E6E6FA"></a></i></li>
-            <li onclick="changeTheme('green.css')"><a><i class="fa fa-circle changecolor"
+            <li onclick="changeTheme('green.css')"><a><i class="fa fa-circle changecolor fas"
                   style="font-size:20px; color: #8FBC8F"></i></a></li>
             <li><a class="nav-link" href="{% url 'Frontend:home' %}" title="view site"><i class="fa fa-home"
                   style="font-size:30px"></i></a></li>

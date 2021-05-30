@@ -43,7 +43,7 @@
     <p style="padding-bottom: 5px;">
       {{product.detail|truncatechars:200}}
     </p>
-    <a href="#" style="color: darkblue; font-weight: bold;">Learn More ><i class="fas fa-chevron-right"></i></a>
+    <a href="{% url 'Frontend:product' product.id %}" style="color: darkblue; font-weight: bold;">Learn More ><i class="fas fa-chevron-right"></i></a>
   </div>
   {% endfor %}
 </section>

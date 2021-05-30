@@ -24,7 +24,28 @@
             padding: 150px 50px;
         }
     }
+
+    .noticecontent {
+        padding: 15px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    @media screen and (max-width: 800px) {
+        .noticecontent {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        #noticebtn {
+            width: 100%;
+        }
+
+    }
 </style>
+
 
 
 <section class="noticeboard">
@@ -32,7 +53,22 @@
         <p id="heading">Want To Be Successful?</p>
         <p>High Quality Course Content, Four Different Category Courses, Compete With Other Students, Secure Your
             Future.</p>
-        <a href="{% url 'Authentication:login' %}"><button
-                style="padding: 10px; width: 30%; color: white; background-color: green; margin-top: 10px; border: 1px solid black">Start</button></a>
+        <p>Login</p>
+    </div>
+</section>
+
+
+
+
+<section class="noticeboard1" style="margin-top: 80px;">
+    <div style="width: 100%; margin: 0 auto; border: 1px solid black;">
+        <section class="noticecontent">
+            <img src="{% static 'frontendicon/logo.png' %}" alt="logo" id="logo" style="width: 80%; height: 100%;" />
+            <div style="margin: auto">
+                <p style="font-size: 3.5vh;">Everything you need to get started.</p>
+                <a href="{% url 'Authentication:login' %}"><button id="noticebtn"
+                        style="padding: 10px; color: white; background-color: green; margin-top: 10px; border: 1px solid black">START</button></a>
+            </div>
+        </section>
     </div>
 </section>

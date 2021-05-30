@@ -1,6 +1,83 @@
 {% extends 'frontend/layout/master.html' %}
+{% load static %}
 
 {% block content %}
+
+<style>
+    .contact {
+        margin-top: 20px;
+    }
+
+    #contact-heading {
+        text-align: center;
+        padding: 10px;
+    }
+
+    #contact-heading p {
+        font-size: 3vh;
+    }
+
+    .content {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        width: 80%;
+        margin: 50px auto;
+        padding: 20px;
+    }
+
+    @media screen and (max-width: 900px) {
+        .content {
+            display: grid;
+            grid-template-columns: 100%;
+        }
+    }
+</style>
+
+
+
+<section class="contact">
+
+    <hr>
+    <div id="contact-heading">
+        <p>Have Some Questions?</p>
+    </div>
+    <hr>
+
+    <div class="content">
+        <div style="padding: 20px;">
+            <img src="{% static 'frontendicon/envelope.png' %}" alt="msg-icon" class="cart-icon"
+                style="width: 60%; height: 90%" />
+        </div>
+        <div>
+            <form action="{% url 'Authentication:login' %}" method="POST">
+                {% csrf_token %}
+
+                {% include "authentication/message.html" %}
+
+                <div>
+                    <label for="fname">Name:</label>
+                    <input type="text" name="name" />
+                </div>
+                <div>
+                    <label for="fname">Email:</label>
+                    <input type="email" name="email" />
+                </div>
+                <div>
+                    <label for="fname">Phone:</label>
+                    <input type="text" name="phone" />
+                </div>
+                <div>
+                    <label for="fname">Message:</label><br>
+                    <textarea name="" id="" style="width: 100%; height: 100px;"></textarea>
+                </div>
+                <div style="margin-top: 10px">
+                    <button type="submit"
+                        style="padding: 10px; width: 100%; background-color: green; color: white">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
 
 {% endblock %}

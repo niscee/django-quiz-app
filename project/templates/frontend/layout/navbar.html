@@ -8,6 +8,8 @@
 
     .main-nav {
       font-size: 10px;
+      top: 0;
+      position: sticky;
     }
   }
 </style>
@@ -19,7 +21,7 @@
   <ul class="main-menu-left">
     <li><a href="{% url 'Frontend:home' %}">Home</a></li>
     <li><a href="{% url 'Frontend:products' %}">Products</a></li>
-    <li><a href="{% url 'Frontend:products' %}">Contact</a></li>
+    <li><a href="{% url 'Frontend:contact' %}">Contact</a></li>
   </ul>
   <ul class="main-menu-right">
     {% if request.user.is_anonymous %}
@@ -34,7 +36,7 @@
     </li>
     {% if request.user.is_authenticated %}
     <li style="padding-left: 0px;">
-      <span style="background-color: red; border-radius: 50%; padding: 8px;">{{userCartStatus.cartTotalQty}}</span>
+      <span style="background-color: blueviolet; color: white; border-radius: 50%; padding: 8px;">{{userCartStatus.cartTotalQty}}</span>
     </li>
     {% endif %}
   </ul>

@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'CourseCategory',
     'Quiz',
     'Slider',
-    'Cart'
+    'Cart',
 ]
 
 MIDDLEWARE = [

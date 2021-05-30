@@ -6,11 +6,20 @@
     .product {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         width: 80%;
-        margin: 50px auto;
+        margin: 40px auto;
         padding: 20px;
         display: grid;
         grid-template-columns: 50% 50%;
         line-height: 2.5;
+    }
+
+    #contact-heading {
+        text-align: center;
+        padding: 10px;
+    }
+
+    #contact-heading p {
+        font-size: 3vh;
     }
 
     @media screen and (max-width: 900px) {
@@ -19,27 +28,42 @@
             grid-template-columns: 1fr;
         }
     }
+
+    .singleproduct {
+        margin-top: 20px;
+    }
 </style>
 
-<section class="product">
-    <div class="image">
-        <img src="{{ product.imageURL }}" alt="" style="height: 500px; width: 100%" />
+<section class="singleproduct">
+    <hr>
+    <div id="contact-heading">
+        <p>Product Detail</p>
     </div>
-    <div class="content" style="padding: 20px; height: auto">
-        <h2 style="text-align: center; padding-bottom: 15px;"><u>{{product.name}}
-                {% if product.qty > 0 %}
-                <span style="color: green">(In Stock)</u></span>
+    <hr>
+
+    <section class="product">
+        <div class="image">
+            <img src="{{ product.imageURL }}" alt="" style="height: 500px; width: 100%" />
+        </div>
+        <div class="content" style="padding: 20px; height: auto">
+            <h2 style="text-align: center; padding-bottom: 15px;"><u>{{product.name}}
+                    {% if product.qty > 0 %}
+                    <span style="color: green">(In Stock)</u></span>
+                {% endif %}
+            </h2>
+            <h3>Category: {{product.CourseCategory_id.name}}</h3>
+            <h3 style="color: green">Price: ${{product.price}}</h3>
+            <hr>
+            <h4>{{product.detail}}</h4>
+            <hr>
+            {% if request.user.is_authenticated %}
+            <button style="padding: 15px; background-color: red; color: white; float: right; margin-top: 10px;"
+                data-product={{product.id}} data-action="addcart" class="cartbtn">Add To Cart</button>
             {% endif %}
-        </h2>
-        <h3>Category: {{product.CourseCategory_id.name}}</h3>
-        <h3 style="color: green">Price: ${{product.price}}</h3>
-        <hr>
-        <h4>{{product.detail}}</h4>
-        <hr>
-        <button style="padding: 15px; background-color: red; color: white; margin-top: 10px;"
-            data-product={{product.id}} data-action="addcart" class="cartbtn">Add To Cart</button>
-    </div>
+        </div>
+    </section>
 </section>
+
 
 <script>
 
