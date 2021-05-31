@@ -6,6 +6,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.cartAdd, name='cartAdd'),
+    path('checkout/', views.checkout, name='checkout'),
+    path('<str:id>/delete/', views.cartDelete, name='cartDelete'),
+    path('<str:id>/update/', views.cartDelete, name='cartUpdate'),
+    path('payment/', views.payment, name='payment'),
+    path('clear-cart/', views.cartClear, name='clearCart'),
     
 ]
 

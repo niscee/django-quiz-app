@@ -19,6 +19,20 @@ class UserCartStatus(models.Model):
         return count
 
 
+    @property
+    def getProducts(self):
+        products = self.cartproduct_set.all()
+        return products 
+
+
+
+    @property
+    def getProductTotal(self):
+        products = self.cartproduct_set.all()
+        total = sum([ int(pro.product.price) for pro in products ]) 
+        return total    
+
+
 
 class CartProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)

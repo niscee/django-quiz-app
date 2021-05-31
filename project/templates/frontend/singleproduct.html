@@ -6,7 +6,7 @@
     .product {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         width: 80%;
-        margin: 40px auto;
+        margin: 80px auto;
         padding: 20px;
         display: grid;
         grid-template-columns: 50% 50%;
@@ -37,7 +37,7 @@
 <section class="singleproduct">
     <hr>
     <div id="contact-heading">
-        <p>Product Detail</p>
+        <p>PRODUCT DETAILS</p>
     </div>
     <hr>
 
@@ -103,7 +103,7 @@
 
     async function addToCart(data) {
         console.log("yes")
-        const response = await fetch('/cart-add/', {
+        const response = await fetch('http://localhost:8000/cart/', {
             method: "POST",
             body: JSON.stringify(data),
             headers: { "Content-type": "application/json; charset=UTF-8", 'X-CSRFTOKEN': csrftoken }

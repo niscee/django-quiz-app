@@ -22,7 +22,7 @@ urlpatterns = [
     path('', include(('Frontend.urls', 'Frontend'), namespace='Frontend')),
 
     # cart operations.
-    path('cart-add/', include(('Cart.urls', 'Cart'), namespace='Cart')),
+    path('cart/', include(('Cart.urls', 'Cart'), namespace='Cart')),
 
     # login/logout.
     path('authentication/', include(('Authentication.urls',

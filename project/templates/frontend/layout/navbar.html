@@ -32,7 +32,7 @@
     </li>
     {% endif %}
     <li>
-      <a href="#"><img src="{% static 'cart.jpg' %}" alt="cart-icon" id="cart-icon" /></a>
+      <a href="{% url 'Cart:checkout' %}"><img src="{% static 'cart.jpg' %}" alt="cart-icon" id="cart-icon" /></a>
     </li>
     {% if request.user.is_authenticated %}
     <li style="padding-left: 0px;">

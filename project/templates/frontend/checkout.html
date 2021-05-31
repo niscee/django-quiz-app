@@ -1,0 +1,145 @@
+{% extends 'frontend/layout/master.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    #contact-heading {
+        text-align: center;
+        padding: 10px;
+    }
+
+    #contact-heading p {
+        font-size: 3vh;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .checkout-content {
+        width: 70%;
+        margin: 100px auto;
+    }
+</style>
+
+<section class="checkout">
+    <hr>
+    <div id="contact-heading">
+        <p>CHECKOUT</p>
+    </div>
+    <hr>
+    <section class="checkout-content">
+        <table>
+            <tr>
+                <th style="width: 30%">Items</th>
+                <th style="width: 20%">Name</th>
+                <th style="width: 20%">Qty</th>
+                <th style="width: 20%">Sub-Total</th>
+                <th style="width: 10%">Remove</th>
+            </tr>
+
+            {% for product in userCartStatus.getProducts %}
+            <tr>
+                <td><img src="{{product.product.imageURL}}" alt="" style="height: 100px; width: 100px;"></td>
+                <td>{{product.product.name}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.product.price}}</td>
+                <td>
+                    <img class="cartbtndelete" data-product="{{product.id}}" src="{% static 'frontendicon/remove.jpg' %}" alt="" style="height: 40px; width: 40px;">
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center; flex: wrap;">
+            <a href="{% url 'Frontend:products' %}"><button
+                    style="padding: 10px; background-color: white; color: black;">Continue
+                    Shopping</button></a>
+            <a href="{% url 'Cart:payment' %}"><button style="padding: 10px; color: white; background-color: black;">Checkout</button></a>
+        </div>
+    </section>
+</section>
+
+
+
+
+
+<script>
+
+    // csrf token django.
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+
+    // cart delete.
+    let cart = document.getElementsByClassName("cartbtndelete");
+
+    for (let i = 0; i < cart.length; i++) {
+        cart[i].addEventListener('click', (e) => {
+            let id = e.target.dataset.product;
+            deleteCart(id);
+        })
+    }
+
+    async function deleteCart(data) {
+        const response = await fetch(`http://localhost:8000/cart/${data}/delete/`, {
+            method: "DELETE",
+            body: JSON.stringify(data),
+            headers: { "Content-type": "application/json; charset=UTF-8", 'X-CSRFTOKEN': csrftoken }
+        })
+        const result = await response.json();
+        location.reload();
+        alert("Product Has Been Deleted From The Cart");
+        
+    }
+
+
+    // cart update.
+    let cartupdate = document.getElementsByClassName("cartQty");
+
+    for (let i = 0; i < cart.length; i++) {
+        cartupdate[i].addEventListener('onKeyDown', (e) => {
+            let qty = e.target.value;
+            alert(qty)
+            // deleteCart(qty);
+        })
+    }
+
+    async function deleteCart(data) {
+        const response = await fetch(`http://localhost:8000/cart/${data}/delete/`, {
+            method: "DELETE",
+            body: JSON.stringify(data),
+            headers: { "Content-type": "application/json; charset=UTF-8", 'X-CSRFTOKEN': csrftoken }
+        })
+        const result = await response.json();
+        location.reload();
+        alert("Product Has Been Deleted From The Cart");
+        
+    }
+
+</script>
+
+{% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.conf import settings
 from .models import CartProduct, UserCartStatus
@@ -21,3 +21,51 @@ def cartAdd(request):
     product.save()
 
     return JsonResponse({"msg": "successful"})
+
+
+# site checkout page.
+def checkout(request):
+    if request.user.is_authenticated:
+        userCartStatus, created = UserCartStatus.objects.get_or_create(
+            user_id=request.user, complete=False)
+    else:
+        userCartStatus = {}
+
+    context = {'userCartStatus': userCartStatus}
+    return render(request, 'frontend/checkout.html', context)
+
+
+# site cart delete func.
+def cartDelete(request, id):
+    id = int(id)
+    product = CartProduct.objects.get(id=id)
+    product.delete()
+    return JsonResponse({"msg": "successful"})   
+
+
+
+# site cart payment func.
+def payment(request):
+    if request.user.is_authenticated:
+        userCartStatus, created = UserCartStatus.objects.get_or_create(
+            user_id=request.user, complete=False)
+    else:
+        userCartStatus = {}
+
+
+
+    context = {'userCartStatus': userCartStatus}
+    return render(request, 'frontend/payment.html', context)
+
+
+# site cart clear func.
+def cartClear(request):
+    if request.user.is_authenticated:
+        userCartStatus, created = UserCartStatus.objects.get_or_create(
+            user_id=request.user, complete=False)
+        userCartStatus.complete = True
+        userCartStatus.save()  
+        return JsonResponse({"msg": "successful"})  
+    else:
+        userCartStatus = {}
+    

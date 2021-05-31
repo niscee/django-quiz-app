@@ -1,0 +1,174 @@
+{% extends 'frontend/layout/master.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    #contact-heading {
+        text-align: center;
+        padding: 10px;
+    }
+
+    #contact-heading p {
+        font-size: 3vh;
+    }
+
+    .payment-content {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        margin-top: 50px;
+    }
+
+    @media screen and (max-width: 900px) {
+        .payment-content {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    #payment-form {
+        border: 1px solid black;
+        padding: 30px;
+        background-color: white;
+        color: black;
+    }
+
+    #order-history {
+        text-align: center;
+    }
+</style>
+
+<section class="payment">
+    <hr>
+    <div id="contact-heading">
+        <p>PAYMENT</p>
+    </div>
+    <hr>
+
+    <section class="payment-content">
+        <div id="payment-form">
+            <img src="{% static 'frontendicon/payment.png' %}"
+                style="width: 70%; height: 160px; display: block; margin: 0px auto 5px;">
+            <div style="width: 60%; margin: auto">
+
+                <form name="myForm" onsubmit="validateForm()" method="POST">
+                    {% csrf_token %}
+
+                    {% include "authentication/message.html" %}
+
+                    <div>
+                        <label for="cnum">Card Number:</label>
+                        <input type="text" name="cnum" />
+                    </div>
+                    <div>
+                        <label for="date">Expiration Date:</label>
+                        <input type="text" name="date" />
+                    </div>
+                    <div>
+                        <label for="code">Security Code:</label>
+                        <input type="text" name="code" />
+                    </div>
+
+                    <div style="margin-top: 10px">
+                        <button type="submit"
+                            style="padding: 10px; width: 100%; background-color: green; color: white">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div id="order-history">
+            <p style="font-size: 2vh;"><u>Order Information</u></p>
+            <div style="width: 70%; margin: 20px auto;">
+
+                <table>
+                    <tr>
+                        <th style="width: 30%">Items</th>
+                        <th style="width: 20%">Name</th>
+                    </tr>
+
+                    {% for product in userCartStatus.getProducts %}
+                    <tr>
+                        <td><img src="{{product.product.imageURL}}" alt=""
+                                style="height: 100px; width: 100px; border-radius: 50%;"></td>
+                        <td>{{product.product.name}}</td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+
+                <p style="font-size: 2vh; color: red; float: right; margin-top: 10px;">Total:
+                    {{userCartStatus.getProductTotal}}</p>
+            </div>
+        </div>
+
+    </section>
+
+</section>
+
+<script>
+
+    // csrf token django.
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+    // connecting to server.
+    async function clearCart() {
+        const response = await fetch('http://localhost:8000/cart/clear-cart/', {
+            method: "POST",
+            headers: { "Content-type": "application/json; charset=UTF-8", 'X-CSRFTOKEN': csrftoken }
+        })
+        const result = await response.json()
+        return result;
+    }
+
+    // validating form.
+    function validateForm(e) {
+        event.preventDefault();
+        var cnum = document.forms["myForm"]["cnum"].value;
+        var date = document.forms["myForm"]["date"].value;
+        var code = document.forms["myForm"]["code"].value;
+        if (cnum == "" || code == "" | date == "") {
+            alert("Every Input Field Should Be Submitted!");
+        }
+
+        if (cnum.length < 16 || cnum.length > 16) {
+            alert("Card number should be of 16 digits.");
+        }
+
+        if (code.length < 3 || code.length > 3) {
+            alert("Security code should be of 3 digits.");
+        }
+
+        var final = clearCart()
+        alert("Thank you for the payment.");
+        location.reload()
+
+    }
+</script>
+{% endblock %}
