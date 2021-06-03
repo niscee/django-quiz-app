@@ -157,17 +157,19 @@
             alert("Every Input Field Should Be Submitted!");
         }
 
-        if (cnum.length < 16 || cnum.length > 16) {
+        else if (cnum.length < 16 || cnum.length > 16) {
             alert("Card number should be of 16 digits.");
         }
 
-        if (code.length < 3 || code.length > 3) {
+        else if (code.length < 3 || code.length > 3) {
             alert("Security code should be of 3 digits.");
         }
 
-        var final = clearCart()
-        alert("Thank you for the payment.");
-        location.reload()
+        else {
+            var final = clearCart()
+            alert("Thank you for the payment.");
+            location.reload()
+        }
 
     }
 </script>
