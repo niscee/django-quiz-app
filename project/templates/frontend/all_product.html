@@ -86,7 +86,7 @@
     }
 
     #contact-heading p {
-        font-size: 3vh;
+        font-size: 2vh;
     }
 
     .allproducts {
@@ -97,80 +97,100 @@
         display: grid;
         grid-template-columns: 35% 30% 35%;
     }
-    
+
     @media screen and (max-width: 900px) {
         #filter {
             grid-template-columns: 100%;
         }
-        
+
+    }
+
+    .item-list {
+        padding: 0px;
+        display: grid;
+        grid-template-columns: 15% 85%;
+    }
+
+    .item-list a:hover{
+        color: red;
+    }
+
+    @media screen and (max-width: 900px) {
+        .item-list {
+            grid-template-columns: 100%;
+        }
+
     }
 </style>
 
 
 <section class="allproducts">
     <hr>
-    <div id="filter">
-        <section class="categoryDropdown" style="width: 100%; padding: 10px;">
-            <div class="dropdown" style="padding: 20px; width: 100%; font-size: 16px;">
-                <button class="dropbtn" style="padding: 10px; width: 100%; font-size: 18px;">Product Category</button>
-                <div class="dropdown-content">
-                    {% for category in categories%}
-                    <a href="{% url 'Frontend:product' category.id %}">{{category.name}}</a>
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
-
-        <div id="contact-heading" style="padding: 30px;">
+    <div id="filter1">
+        <div id="contact-heading">
             <p><u>AVAILABLE PRODUCTS</u></p>
         </div>
-
-        <section class="categoryDropdown" style="width: 100%; padding: 10px;">
-            <div class="dropdown" style="padding: 20px; width: 100%; font-size: 16px;">
-                <button class="dropbtn" style="padding: 10px; width: 100%; font-size: 18px;">Sort Product</button>
-                <div class="dropdown-content">
-                    <a href="{% url 'Frontend:product' 'new' %}">Latest Product</a>
-                    <a href="{% url 'Frontend:product' 'old' %}">Old Product</a>
-                </div>
-            </div>
-        </section>
     </div>
     <hr>
 
-    
+
 </section>
 
 
 
 
 <!--product cards-->
+<div class="item-list">
+    <section class="options">
+        <article>
+            <h3 style="margin-top: 50px;"><u>Shop By Category</u></h3>
+            <ul style="line-height: 2rem; margin-top: 20px;">
+                {% for category in categories%}
+                <a href="{% url 'Frontend:product' category.id %}">
+                    <li>- {{category.name}}</li>
+                </a>
+                {% endfor %}
+            </ul>
+        </article>
 
-{% if products %}
-<section class="product-card">
+        <article>
+            <h3 style="margin-top: 50px;"><u>Sort By Date</u></h3>
+            <ul style="line-height: 2rem; margin-top: 20px;">
+                <a href="{% url 'Frontend:products' %}"><li>- All Product</li></a>
+                <a href="{% url 'Frontend:product' 'new' %}"><li>- Latest Product</li></a>
+                <a href="{% url 'Frontend:product' 'old' %}"><li>- Old Product</li></a>
+            </ul>
+        </article>
+    </section>
+    {% if products %}
+    <section class="product-card">
 
-    {% for product in products %}
-    <div class="product-category-card">
-        <img src="{{ product.imageURL }}" alt="" style="height: 250px; width: 100%" />
-        <h3>{{product.name}}</h3>
-        <p style="padding-bottom: 20px;">
-            {{product.detail|truncatechars:100}}
-        </p>
-        <a href="{% url 'Frontend:singleproduct' product.id %}" style="color: darkblue; font-weight: bold;">Learn More
-            <i class="fas fa-chevron-right"></i></a>
+        {% for product in products %}
+        <div class="product-category-card">
+            <img src="{{ product.imageURL }}" alt="" style="height: 250px; width: 100%" />
+            <h3>{{product.name}}</h3>
+            <p style="padding-bottom: 20px;">
+                {{product.detail|truncatechars:60}}
+            </p>
+            <a href="{% url 'Frontend:singleproduct' product.id %}" style="color: darkblue; font-weight: bold;">Learn
+                More
+                <i class="fas fa-chevron-right"></i></a>
 
-        {% if request.user.is_authenticated %}
-        <button style="padding: 10px; background-color: red; color: white; float: right" data-product={{product.id}}
-            data-action="addcart" class="cartbtn">Add To Cart</button>
-        {% endif %}
+            {% if request.user.is_authenticated %}
+            <button style="padding: 10px; background-color: red; color: white; float: right" data-product={{product.id}}
+                data-action="addcart" class="cartbtn">Add To Cart</button>
+            {% endif %}
 
-    </div>
-    {% endfor %}
+        </div>
+        {% endfor %}
 
-</section>
+    </section>
 
-{% else %}
-<h1 style="text-align: center; margin-top: 50px; background-color: red; padding: 20px;">NO ITEM AVAILABLE</h1>
-{% endif %}
+    {% else %}
+    <h1 style="text-align: center; margin-top: 50px; background-color: red; padding: 20px;">NO ITEM AVAILABLE</h1>
+    {% endif %}
+</div>
+
 
 
 <script>

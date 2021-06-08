@@ -8,7 +8,7 @@ from Cart.models import UserCartStatus, CartProduct
 
 # site landing page.
 def index(request):
-    products = Product.objects.order_by('id')[:4]
+    products = Product.objects.order_by('-id')[:4]
     sliders = Slider.objects.order_by('id')
 
     if request.user.is_authenticated:
@@ -48,9 +48,9 @@ def filterproduct(request, id):
         userCartStatus = {}
 
     if id == "new":
-        products = Product.objects.order_by('id')
-    elif id == "old":
         products = Product.objects.order_by('-id')
+    elif id == "old":
+        products = Product.objects.order_by('id')
     else:
         products = Product.objects.filter(CourseCategory_id=id)
 

@@ -21,9 +21,13 @@
     }
 
     #contact-heading p {
-        font-size: 3vh;
+        font-size: 2vh;
     }
-
+    
+    .payment{
+        margin-top: 20px;
+    }
+    
     .payment-content {
         display: grid;
         grid-template-columns: 50% 50%;
@@ -168,7 +172,7 @@
         else {
             var final = clearCart()
             alert("Thank you for the payment.");
-            location.reload()
+            window.location.href = "http://localhost:8000/";
         }
 
     }

@@ -16,7 +16,7 @@
 
   /* loging-form */
   .login {
-    width: 60%;
+    width: 50%;
     margin: 0 auto;
     border: 1px solid black;
     padding: 40px;
@@ -28,8 +28,8 @@
   div #login-heading {
     background-color: #0067b8;
     padding: 30px;
-    width: 60%;
-    margin: 100px auto 0px;
+    width: 50%;
+    margin: 60px auto 0px;
     text-align: center;
     color: white;
   }
@@ -40,10 +40,23 @@
     margin: 8px 0;
     box-sizing: border-box;
   }
+
+  #logins-heading {
+    text-align: center;
+    padding: 10px;
+  }
+
+  #logins-heading p {
+    font-size: 2vh;
+  }
 </style>
 
 
-
+<hr style="margin-top: 20px;">
+<div id="logins-heading">
+  <p>LOG IN</p>
+</div>
+<hr>
 
 <!--login form-->
 <div id="login-heading">
@@ -74,6 +87,6 @@
       <a href="{% url 'Authentication:register' %}" style="text-decoration: underline">sign up</a>
     </h5>
   </div>
-  
+
 </div>
 {% endblock %}

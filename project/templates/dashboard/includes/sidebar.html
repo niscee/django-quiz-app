@@ -1,15 +1,35 @@
+{% load static %}
 <style>
   a {
     color: black;
   }
+
+  #sidbar-dashboard {
+    height: 91vh;
+    line-height: 2;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+    background-image: linear-gradient( 114.2deg,  rgba(121,194,243,1) 22.6%, rgba(255,180,239,1) 67.7% );
+  }
+
+  @media screen and (max-width: 1000px) {
+    #sidbar-dashboard {
+      height: auto;
+    }
+  }
 </style>
 
-<div style="line-height: 2;">
+<div id="sidbar-dashboard" style="">
+  <div style="background-color: white; margin-bottom: 50px; height: 100px;">
+    <img src="{% static 'frontendicon/logo.png' %}" alt="logo" id="logo"
+      style="height: 100%; width: 40%; display: block; margin: 0px auto;">
+  </div>
+
   <a href="{% url 'Dashboard:dashboard' %}">
     <p><i class="fa fa-home"></i> Home</p>
   </a>
   <a href="{% url 'Dashboard:profile' %}">
-    <p><i class="fa fa-address-book"></i> Profile</p> 
+    <p><i class="fa fa-address-book"></i> Profile</p>
   </a>
   <a href="{% url 'Quiz:leaderBoard' %}">
     <p><i class="fa fa-bar-chart"></i> LeaderBoard</p>

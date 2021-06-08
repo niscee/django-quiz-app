@@ -17,21 +17,21 @@
 
 <style>
   .container1 {
-    padding: 30px;
-    width: 98%;
+    padding: 10px;
+    width: 99%;
     margin: auto;
   }
 
   .nav-right li {
     padding-left: 5px;
   }
-  
+
   @media screen and (max-width: 800px) {
     #right-headnav {
       display: none;
     }
 
-    .ul-left{
+    .ul-left {
       display: none;
     }
   }
@@ -41,6 +41,34 @@
       display: none;
     }
   }
+
+  #dashboard-main-content {
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: white;
+    height: 80vh;
+  }
+
+  @media screen and (max-width: 1000px) {
+    #dashboard-main-content {
+      height: auto;
+    }
+
+  }
+
+  #dashboard-main-heading {
+    background-color: white;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 100px;
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    justify-content: space-between;
+    background-image: linear-gradient( 65.9deg,  rgba(85,228,224,1) 5.5%, rgba(75,68,224,0.74) 54.2%, rgba(64,198,238,1) 55.2%, rgba(177,36,224,1) 98.4% );
+    flex-wrap: wrap;
+    width: 100%;
+  }
 </style>
 
 <body>
@@ -49,15 +77,11 @@
   <div class="container1">
     <div class="row">
       <div class="col-md-2 col-sm-12 col-lg-2">
-        <div style="background-color: white; margin-bottom: 50px; height: 100px;">
-          <img src="{% static 'frontendicon/logo.png' %}" alt="logo" id="logo"
-            style="height: 100%; width: 40%; display: block; margin: 0px auto;">
-        </div>
         {% include "dashboard/includes/sidebar.html" %}
       </div>
 
       <div class="col-md-10 col-sm-12 col-lg-10">
-        <div style="background-color: white; margin-bottom: 20px; height: 100px; display: flex; align-items: center; padding: 0px 10px; justify-content: space-between; flex-wrap: wrap;">
+        <div id="dashboard-main-heading">
 
           <ul style="display: flex; list-style-type: none; align-items: center;">
             <li class="ul-left"><a href=""><img src="{{request.user.userprofile.imageURL}}" alt="user-profile"
@@ -83,7 +107,7 @@
 
         </div>
 
-        <div style="padding: 20px; box-sizing: border-box; background-color: white">
+        <div id="dashboard-main-content" style="">
           {% block content %} {% endblock %}
         </div>
       </div>
