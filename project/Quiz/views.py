@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import QuizForm
+from .forms import QuizForm, QuizPointForm
 from django.contrib import messages
 from .models import Question, QuizAttempt, QuizPoint
 from UserProfile.models import UserProfile
@@ -14,6 +14,8 @@ TUTORURL = 'dashboard/quiz/teacher'
 STUDURL = 'dashboard/quiz/student'
 
 # instructor controller
+
+
 @login_required(login_url=URL)
 def home(request):
     questions = Question.objects.order_by('id')
@@ -62,40 +64,11 @@ def editQuestion(request, id):
     return render(request, f'{TUTORURL}/quiz_update.html', context)
 
 
-
-
 # student controller.
 @login_required(login_url=URL)
 def startQuiz(request):
     context = {}
     return render(request, f'{STUDURL}/startquiz.html', context)
-
-
-# @login_required(login_url=URL)
-# def progressQuiz(request):
-#     attempt, created = QuizAttempt.objects.get_or_create(
-#             user_id = request.user,
-#             status = False
-#         )
-#     q = Question.objects.order_by('id')
-#     count = len(q)
-
-#     # number of data in page.
-#     paginator = Paginator(q, 1)
-#     page = request.GET.get('page')
-
-#     try:
-#         qlist = paginator.page(page)
-#     except PageNotAnInteger:
-#             # If page is not an integer deliver the first page
-#         qlist = paginator.page(1)
-#     except EmptyPage:
-#         # If page is out of range deliver last page of results
-#         qlist = paginator.page(paginator.num_pages)
-
-
-#     context = {'qlist': qlist, 'count': count}
-#     return render(request, f'{STUDURL}/progressquiz.html', context)
 
 
 @login_required(login_url=URL)
@@ -122,7 +95,7 @@ def submitQuiz(request):
 
     # getting QuizAttempt instance.
     attempt = QuizAttempt.objects.get(id=attempt_id)
-    
+
     # calling countScore function, returns score.
     count = QuizPoint.countScore(anscol)
 
@@ -132,18 +105,34 @@ def submitQuiz(request):
 
     # saving user score in database.
     qscore = QuizPoint(quizattempt_id=attempt, score=count, percentage=percent)
-    qscore.save()    
-    
+    qscore.save()
+
     # updating user quiz status.
     attempt.status = True
     attempt.save()
-    
+
     context = {'qscore': qscore, 'quesLen': quesLen}
     return render(request, f'{STUDURL}/quizresult.html', context)
 
-    
+
 def leaderBoard(request):
     profiles = QuizPoint.objects.order_by('-percentage')
     context = {'profiles': profiles}
-    return render(request, 'dashboard/quiz/leaderboard.html', context) 
+    return render(request, 'dashboard/quiz/leaderboard.html', context)
+
+
+@login_required(login_url=URL)
+def feedback(request, id):
+    q = QuizPoint.objects.get(id=id)
+    if request.method == "POST":
+        form = QuizPointForm(request.POST, instance=q)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, 'Successful!!')
+
+    form = QuizPointForm(instance=q)
+    context = {'form': form, 'q': q}
+    return render(request, 'dashboard/quiz/feedback.html', context)
+
     

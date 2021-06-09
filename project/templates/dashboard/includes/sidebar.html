@@ -5,10 +5,10 @@
   }
 
   #sidbar-dashboard {
-    height: 91vh;
+    height: 96.5vh;
     line-height: 2;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 20px;
+    padding: 25px;
     background-image: linear-gradient( 114.2deg,  rgba(121,194,243,1) 22.6%, rgba(255,180,239,1) 67.7% );
   }
 
@@ -34,6 +34,7 @@
   <a href="{% url 'Quiz:leaderBoard' %}">
     <p><i class="fa fa-bar-chart"></i> LeaderBoard</p>
   </a>
+ 
 
 
   {% if request.user.userprofile.user_type == "TEC" %}
@@ -52,5 +53,9 @@
   <a href="{% url 'Quiz:startQuiz' %}">
     <p><i class="fa fa-keyboard-o"></i> Quiz</p>
   </a>
+  <a href="{% url 'Dashboard:purchaseHistory' %}">
+    <p><i class="fa fa-cart-arrow-down"></i> Purchase History</p>
+  </a>
+  
   {% endif %}
 </div>

@@ -1,0 +1,70 @@
+{% extends 'dashboard/includes/master.html' %} {% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<style>
+  @keyframes example {
+    from {
+      transform: translateX(0%);
+    }
+
+    to {
+      transform: translateX(20%);
+    }
+
+  }
+
+  /* The element to apply the animation to */
+  #image {
+    animation-name: example;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    max-width: 100px;
+    width: 100px;
+    height: 80px;
+    border-radius: 35%;
+
+  }
+</style>
+
+<div class="card">
+  <div class="card-header">History</div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <!--Table-->
+      <table class="table table-striped">
+
+        <!--Table head-->
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <!--Table head-->
+
+        <!--Table body-->
+        <tbody>
+          {% for product in products %}
+          {% for pro in product.getProducts %}
+          <tr>
+            <td><img src="{{pro.product.imageURL}}" alt="" style="height: 100px; width: 100px;"></td>
+            <td>{{pro.product.name}}</td>
+            <td>{{pro.product.CourseCategory_id.name}}</td>
+            <td>{{pro.product.price}}</td>
+          </tr>
+          {% endfor %}
+          {% endfor %}
+        </tbody>
+        <!--Table body-->
+      </table>
+      <!--Table-->
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

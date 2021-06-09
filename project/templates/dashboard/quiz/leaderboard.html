@@ -1,6 +1,7 @@
 {% extends 'dashboard/includes/master.html' %} {% block content %}
 {% load crispy_forms_tags %}
 
+
 <style>
   @keyframes example {
     from {
@@ -41,19 +42,29 @@
             <th>Email</th>
             <th>Score</th>
             <th>Percentage</th>
+            <th>Feedback</th>
           </tr>
         </thead>
         <!--Table head-->
 
         <!--Table body-->
         <tbody>
+
           {% for p in profiles %}
           <tr>
             <td><img id="image" src="{{p.quizattempt_id.user_id.userprofile.imageURL}}" alt="userprofile"></td>
             <td>{{p.quizattempt_id.user_id.username}}</td>
             <td>{{p.quizattempt_id.user_id.email}}</td>
             <td>{{p.score}}</td>
-            <td>{{p.percentage}}%</td>
+            <td>
+              {{p.percentage}}%
+              {% if request.user.userprofile.user_type == "TEC" %}
+              <span display="inline"><a href="{% url 'Quiz:feedback' p.id %}" style="color: red"><p>Feedback</p></a></span>
+              {% endif %}
+
+              <td>{{p.feedback}}</td>
+            </td>
+
           </tr>
           {% endfor %}
         </tbody>

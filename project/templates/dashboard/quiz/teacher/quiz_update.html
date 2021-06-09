@@ -18,12 +18,16 @@
   >
     Question Update Form
   </p>
+
   <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %} {% include "authentication/message.html" %} {{form|crispy}}
+    {% csrf_token %} 
+    {% include "authentication/message.html" %} 
+    {{form|crispy}}
     <button type="submit" class="btn btn-outline-success btn-block">
       Update
     </button>
   </form>
+  
 </div>
 
 {% endblock %}

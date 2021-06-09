@@ -36,6 +36,7 @@ class QuizPoint(models.Model):
         on_delete=models.CASCADE)
     score = models.BigIntegerField(default=0) 
     percentage = models.BigIntegerField(default=0)
+    feedback = models.CharField(max_length=200, blank=True, null=True)
 
 
     def __str__(self):

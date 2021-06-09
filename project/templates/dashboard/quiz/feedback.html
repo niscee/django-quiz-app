@@ -1,0 +1,85 @@
+{% extends 'dashboard/includes/master.html' %} {% block content %}
+{% load crispy_forms_tags %}
+
+<style>
+    @keyframes example {
+        from {
+            transform: translateX(0%);
+        }
+
+        to {
+            transform: translateX(20%);
+        }
+
+    }
+
+    /* The element to apply the animation to */
+    #image {
+        animation-name: example;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+        max-width: 100px;
+        width: 100px;
+        height: 80px;
+        border-radius: 35%;
+
+    }
+</style>
+
+<div class="card" style="padding: 20px;">
+    <div class="card-header">Feedback</div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <!--Table-->
+            <table class="table table-striped">
+
+                <!--Table head-->
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Score</th>
+                        <th>Percentage</th>
+                    </tr>
+                </thead>
+                <!--Table head-->
+
+                <!--Table body-->
+                <tbody>
+
+                    <tr>
+                        <td><img id="image" src="{{q.quizattempt_id.user_id.userprofile.imageURL}}" alt="userprofile">
+                        </td>
+                        <td>{{q.quizattempt_id.user_id.username}}</td>
+                        <td>{{q.quizattempt_id.user_id.email}}</td>
+                        <td>{{q.score}}</td>
+                        <td>
+                            {{q.percentage}}%
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div style="width: 50%; margin: auto">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %} {% include "authentication/message.html" %} {{form|crispy}}
+            <button type="submit" class="btn btn-outline-success btn-block">
+                Update
+            </button>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+</script>
+
+{% endblock %}

@@ -13,6 +13,7 @@ urlpatterns = [
     path('quiz-progress', views.progressQuiz, name='progressQuiz'),
     path('quiz-submit', views.submitQuiz, name='submitQuiz'),
     path('quiz-leaderboard', views.leaderBoard, name='leaderBoard'),
+    path('<int:id>/quiz-feedback', views.feedback, name='feedback'),
     
 ]
 

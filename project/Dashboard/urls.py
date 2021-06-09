@@ -7,6 +7,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     path('profile/', views.profile, name='profile'),
+    path('purchase-history/', views.purchase, name='purchaseHistory'),
 ]
 
 if settings.DEBUG:

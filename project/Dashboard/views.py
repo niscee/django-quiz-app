@@ -1,3 +1,4 @@
+from Cart.models import UserCartStatus
 from django.shortcuts import render
 from UserProfile.forms import UserProfileForm
 from Authentication.forms import UpdateRegisterForm
@@ -40,3 +41,12 @@ def profile(request):
     USER_FORM = UpdateRegisterForm(instance=request.user)
     context = {'USERPROFILE_FORM': USERPROFILE_FORM, 'USER_FORM': USER_FORM}
     return render(request, 'dashboard/userprofile/profile.html', context)
+
+
+
+# dashboard user and profile update form. 
+@login_required(login_url=URL)
+def purchase(request):
+    products = UserCartStatus.objects.filter(user_id=request.user, complete=True).order_by('-id')
+    context = {'products': products}
+    return render(request, 'dashboard/purchase/purchase.html', context)    
